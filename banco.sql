@@ -55,3 +55,4 @@ CREATE TABLE movimentacoes(
     REFERENCES usuarios(id)
 
 );
+
