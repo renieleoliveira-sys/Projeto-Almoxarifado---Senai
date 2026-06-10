@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+
+    <title>Usuários</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+</head>
+s
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Almoxerifado</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="cadastroproduto.html">Cadastrar Produto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="produtos.html">Produtos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="movimentacao.html">Movimentação</a>
+        </li>
+        <li class="nav-item">          <a class="nav-link" href="relatorio.html">Relatório</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="#" onclick="logout()">Sair</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="container mt-5">
+
+        <h2>Cadastro</h2>
+
+        <input
+            type="text"
+            id="nome"
+            class="form-control mb-2"
+            placeholder="Nome">
+
+        <input
+            type="email"
+            id="email"
+            class="form-control mb-2"
+            placeholder="Email">
+
+        <input
+            type="password"
+            id="senha"
+            class="form-control mb-2"
+            placeholder="Senha">
+
+        <select
+            id="perfil"
+            class="form-control mb-2">
+
+            <option value="OPERADOR">
+                Operador
+            </option>
+
+            <option value="ADMIN">
+                Administrador
+            </option>
+
+        </select>
+
+        <button
+            onclick="cadastrarUsuario()"
+            class="btn btn-success">
+
+            Salvar
+
+        </button>
+
+        <button onclick="window.location.href='login.html'">
+        Login
+        </button>
+
+    </div>
+
+    <script>
+
+        async function cadastrarUsuario() {
+
+            const token =
+                localStorage.getItem('token');
+
+            if(!token){
+                alert('Erro: Nenhum token encontrado. Faça login novamente!');
+                window.location = 'login.html';
+                return;
+            }
+
+            await fetch(
+                'http://localhost:3000/usuarios',
+                {
+                    method: 'POST',
+
+                    headers: {
+                        'Content-Type': 'application/json',
+                        authorization: token
+                    },
+
+                    body: JSON.stringify({
+
+                        nome:
+                            document.getElementById('nome').value,
+
+                        email:
+                            document.getElementById('email').value,
+
+                        senha:
+                            document.getElementById('senha').value,
+
+                        perfil:
+                            document.getElementById('perfil').value
+
+                    })
+
+                }
+            );
+
+            alert('Usuário cadastrado!');
+
+        }
+
+    </script>
+
+</body>
+
+</html>

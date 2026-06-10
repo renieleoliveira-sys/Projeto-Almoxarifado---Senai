@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Meu Perfil</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="#">Almoxerifado</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="cadastroproduto.html">Cadastrar Produto</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="produtos.html">Produtos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="movimentacao.html">Movimentação</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="relatorio.html">Relatório</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="perfil.html">👤 Meu Perfil</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-danger" href="#" onclick="logout()">Sair</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-5">
+
+<div class="row">
+  <div class="col-md-6">
+    <div class="card">
+      <div class="card-header bg-primary text-white">
+        <h5>👤 Meu Perfil</h5>
+      </div>
+      <div class="card-body">
+        <p><strong>Nome:</strong> <span id="nome-usuario"></span></p>
+        <p><strong>Email:</strong> <span id="email-usuario"></span></p>
+        <p><strong>Perfil:</strong> <span id="perfil-usuario" class="badge bg-info"></span></p>
+        <p><strong>ID do Usuário:</strong> <span id="id-usuario" class="text-muted"></span></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<script>
+
+function carregarPerfil(){
+
+  const usuario = JSON.parse(localStorage.getItem('usuario') || '{}');
+
+  if(!usuario.id){
+    alert('Erro: Usuário não encontrado. Faça login novamente!');
+    window.location = 'login.html';
+    return;
+  }
+
+  document.getElementById('nome-usuario').textContent = usuario.nome || 'N/A';
+  document.getElementById('email-usuario').textContent = usuario.email || 'N/A';
+  document.getElementById('perfil-usuario').textContent = usuario.perfil || 'N/A';
+  document.getElementById('id-usuario').textContent = usuario.id || 'N/A';
+
+}
+
+function logout(){
+  localStorage.removeItem('token');
+  localStorage.removeItem('usuario');
+  window.location = 'login.html';
+}
+
+window.onload = function(){
+  carregarPerfil();
+};
+
+</script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

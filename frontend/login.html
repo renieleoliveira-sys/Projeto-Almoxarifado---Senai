@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login - Almoxerifado</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-container {
+    background: white;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    max-width: 400px;
+    width: 100%;
+  }
+
+  .login-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  .btn-primary {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .cadastro-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+  }
+
+  .cadastro-link a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .cadastro-link a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="login-container">
+
+  <h2>🔐 Almoxerifado</h2>
+
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input id="email" type="email" class="form-control" placeholder="seu@email.com">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Senha</label>
+    <input id="senha" type="password" class="form-control" placeholder="Sua senha">
+  </div>
+
+  <button onclick="login()" class="btn btn-primary">
+    Entrar
+  </button>
+
+  <div class="cadastro-link">
+    Não tem conta? <a href="cadastro.html">Cadastre-se aqui</a>
+  </div>
+
+</div>
+
+<script src="js/login.js"></script>
+
+</body>
+</html>

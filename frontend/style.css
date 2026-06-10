@@ -1,0 +1,219 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.navbar {
+    background: linear-gradient(90deg, #2c3e50 0%, #34495e 100%) !important;
+    box-shadow: 0 2px 8px rgba(0,0,0,.15);
+}
+
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+    color: #fff !important;
+}
+
+.navbar-brand:hover {
+    color: #667eea !important;
+}
+
+.nav-link {
+    color: #ecf0f1 !important;
+    font-weight: 500;
+    margin: 0 8px;
+    transition: all 0.3s ease;
+}
+
+.nav-link:hover {
+    color: #667eea !important;
+    text-decoration: underline;
+}
+
+.container {
+    background: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin-top: 30px;
+    box-shadow: 0 8px 32px rgba(0,0,0,.15);
+    animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    margin-bottom: 25px;
+    color: #2c3e50;
+    font-weight: 700;
+    border-bottom: 3px solid #667eea;
+    padding-bottom: 10px;
+}
+
+h1 {
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.btn {
+    margin-top: 10px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    border-radius: 6px;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border: none;
+}
+
+.btn-primary:hover {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    border: none;
+    color: white;
+}
+
+.btn-success:hover {
+    background: linear-gradient(135deg, #38ef7d 0%, #11998e 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(17, 153, 142, 0.4);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #95a5a6 0%, #7f8c8d 100%);
+    border: none;
+    color: white;
+}
+
+.btn-secondary:hover {
+    background: linear-gradient(135deg, #7f8c8d 0%, #95a5a6 100%);
+    transform: translateY(-2px);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+    border: none;
+}
+
+.btn-danger:hover {
+    background: linear-gradient(135deg, #f45c43 0%, #eb3349 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(235, 51, 73, 0.4);
+}
+
+.form-control {
+    border: 2px solid #e0e0e0;
+    border-radius: 6px;
+    padding: 10px 12px;
+    transition: all 0.3s ease;
+    font-size: 14px;
+}
+
+.form-control:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 0.2rem rgba(102, 126, 234, 0.25);
+    background-color: #f8f9ff;
+}
+
+.form-control.is-valid {
+    border-color: #28a745;
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.form-label {
+    color: #2c3e50;
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.table {
+    margin-top: 20px;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.table thead th {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    font-weight: 700;
+    border: none;
+    padding: 15px;
+}
+
+.table tbody tr {
+    transition: all 0.2s ease;
+}
+
+.table tbody tr:hover {
+    background-color: #f0f4ff;
+    transform: scale(1.01);
+}
+
+.table tbody td {
+    padding: 12px 15px;
+    color: #2c3e50;
+    border-color: #e0e0e0;
+}
+
+.badge {
+    padding: 6px 12px;
+    font-weight: 600;
+    border-radius: 20px;
+    font-size: 12px;
+}
+
+.badge.bg-success {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
+}
+
+.badge.bg-danger {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%) !important;
+}
+
+.alert {
+    border-radius: 8px;
+    border: none;
+    padding: 12px 20px;
+    font-weight: 500;
+}
+
+.alert-danger {
+    background: #ffe5e5;
+    color: #c00;
+}
+
+.alert-success {
+    background: #e5ffe5;
+    color: #060;
+}
+
+.alert-info {
+    background: #e5f3ff;
+    color: #006;
+}

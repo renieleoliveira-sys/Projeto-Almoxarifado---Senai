@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Cadastro - Almoxerifado</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+  body {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cadastro-container {
+    background: white;
+    border-radius: 10px;
+    padding: 40px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    max-width: 450px;
+    width: 100%;
+  }
+
+  .cadastro-container h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    color: #333;
+  }
+
+  .btn-success {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+  }
+
+  .login-link {
+    text-align: center;
+    margin-top: 20px;
+    color: #666;
+  }
+
+  .login-link a {
+    color: #667eea;
+    text-decoration: none;
+    font-weight: bold;
+  }
+
+  .login-link a:hover {
+    text-decoration: underline;
+  }
+</style>
+
+</head>
+<body>
+
+<div class="cadastro-container">
+
+  <h2>📝 Novo Cadastro</h2>
+
+  <div class="mb-3">
+    <label class="form-label">Nome</label>
+    <input id="nome" type="text" class="form-control" placeholder="Seu nome completo">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Email</label>
+    <input id="email" type="email" class="form-control" placeholder="seu@email.com">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Senha</label>
+    <input id="senha" type="password" class="form-control" placeholder="Crie uma senha">
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Confirmar Senha</label>
+    <input id="confirmarSenha" type="password" class="form-control" placeholder="Confirme sua senha" oninput="validarSenhas()">
+    <small id="avisoSenha" class="d-block mt-2" style="display:none;"></small>
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Perfil</label>
+    <select id="perfil" class="form-control">
+      <option value="OPERADOR">Operador</option>
+      <option value="ADMIN">Administrador</option>
+    </select>
+  </div>
+
+  <button onclick="cadastrar()" class="btn btn-success">
+    Cadastrar
+  </button>
+
+  <div class="login-link">
+    Já tem conta? <a href="login.html">Faça login aqui</a>
+  </div>
+
+</div>
+
+<script>
+
+function validarSenhas(){
+  const senha = document.getElementById('senha').value;
+  const confirmarSenha = document.getElementById('confirmarSenha').value;
+  const avisoSenha = document.getElementById('avisoSenha');
+  const inputConfirmar = document.getElementById('confirmarSenha');
+
+  if(!confirmarSenha) {
+    avisoSenha.style.display = 'none';
+    inputConfirmar.classList.remove('is-valid', 'is-invalid');
+    return;
+  }
+
+  if(senha === confirmarSenha) {
+    avisoSenha.innerHTML = '✅ Senhas conferem!';
+    avisoSenha.style.color = '#28a745';
+    avisoSenha.style.display = 'block';
+    inputConfirmar.classList.remove('is-invalid');
+    inputConfirmar.classList.add('is-valid');
+  } else {
+    avisoSenha.innerHTML = '❌ Senhas não conferem!';
+    avisoSenha.style.color = '#dc3545';
+    avisoSenha.style.display = 'block';
+    inputConfirmar.classList.remove('is-valid');
+    inputConfirmar.classList.add('is-invalid');
+  }
+}
+
+async function cadastrar(){
+
+  const nome = document.getElementById('nome').value;
+  const email = document.getElementById('email').value;
+  const senha = document.getElementById('senha').value;
+  const confirmarSenha = document.getElementById('confirmarSenha').value;
+  const perfil = document.getElementById('perfil').value;
+
+  if(!nome || !email || !senha || !confirmarSenha){
+    alert('Por favor, preencha todos os campos!');
+    return;
+  }
+
+  if(senha !== confirmarSenha){
+    alert('As senhas não conferem!');
+    return;
+  }
+
+  if(senha.length < 6){
+    alert('A senha deve ter pelo menos 6 caracteres!');
+    return;
+  }
+
+  try {
+    console.log('Iniciando cadastro...');
+    
+    const response = await fetch(
+      'http://localhost:3000/usuarios/publico/registrar',
+      {
+        method: 'POST',
+
+        headers: {
+          'Content-Type': 'application/json'
+        },
+
+        body: JSON.stringify({
+          nome,
+          email,
+          senha,
+          perfil
+        })
+      }
+    );
+
+    console.log('Status da resposta:', response.status);
+    console.log('Content-Type:', response.headers.get('content-type'));
+
+    const contentType = response.headers.get('content-type');
+    if(!contentType || !contentType.includes('application/json')){
+      console.error('Resposta não é JSON. Tipo:', contentType);
+      alert('❌ Erro: Servidor não respondeu corretamente. Verifique se o servidor está rodando!');
+      return;
+    }
+
+    const data = await response.json();
+
+    console.log('Dados recebidos:', data);
+
+    if(!response.ok){
+      alert('❌ Erro: ' + (data.msg || 'Erro ao cadastrar'));
+      return;
+    }
+
+    alert('✅ Cadastro realizado com sucesso! Faça login agora.');
+    window.location = 'login.html';
+
+  } catch(err){
+    console.error('Erro ao cadastrar:', err);
+    alert('❌ Erro ao cadastrar: ' + err.message + '\n\nVerifique se o servidor está rodando em http://localhost:3000');
+  }
+
+}
+
+</script>
+
+</body>
+</html>
