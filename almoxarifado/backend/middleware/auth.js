@@ -1,5 +1,7 @@
 const jwt = require('jsonwebtoken');
 
+const JWT_SECRET = process.env.JWT_SECRET || 'segredo';
+
 module.exports = (req,res,next)=>{
 
  let token = req.headers.authorization;
@@ -17,7 +19,7 @@ module.exports = (req,res,next)=>{
 
    const decoded = jwt.verify(
       token,
-      'segredo'
+      JWT_SECRET
    );
 
    req.user = decoded;
